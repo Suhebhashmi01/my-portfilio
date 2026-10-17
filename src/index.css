@@ -40,9 +40,20 @@
     @apply border-border;
   }
 
+  html,
   body {
-    @apply bg-background text-foreground font-sans antialiased overflow-x-hidden;
+    @apply bg-background text-foreground font-sans antialiased;
+    overflow-x: hidden;
+    width: 100%;
+    position: relative;
     scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  #root {
+    overflow-x: hidden;
+    width: 100%;
+    min-height: 100%;
   }
 
   h1,
@@ -52,6 +63,11 @@
   h5,
   h6 {
     @apply font-display tracking-tight;
+  }
+
+  /* Prevent 300ms mobile tap delay */
+  a, button, input, textarea, select {
+    touch-action: manipulation;
   }
 }
 
@@ -70,6 +86,24 @@
 
   .glass-card:hover {
     @apply border-white/20 shadow-[0_8px_32px_0_rgba(0,0,0,0.5)];
+  }
+
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: rgba(161, 161, 170, 0.3);
+    border-radius: 9999px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: rgba(161, 161, 170, 0.5);
   }
 }
 

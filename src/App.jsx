@@ -15,22 +15,22 @@ function App() {
   const [isDark, setIsDark] = useState(true);
 
   useEffect(() => {
-    // Check local storage or system preference
+    // Check local storage or system preference, default to dark for this portfolio
     const storedTheme = localStorage.getItem('theme');
-    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const shouldBeDark = storedTheme !== null ? storedTheme === 'dark' : true;
     
-    if (storedTheme === 'dark' || (!storedTheme && systemPrefersDark)) {
-      setIsDark(true);
+    setIsDark(shouldBeDark);
+    if (shouldBeDark) {
       document.documentElement.classList.add('dark');
     } else {
-      setIsDark(false);
       document.documentElement.classList.remove('dark');
     }
   }, []);
 
   const toggleTheme = () => {
-    setIsDark(!isDark);
-    if (!isDark) {
+    const nextDark = !isDark;
+    setIsDark(nextDark);
+    if (nextDark) {
       document.documentElement.classList.add('dark');
       localStorage.setItem('theme', 'dark');
     } else {
